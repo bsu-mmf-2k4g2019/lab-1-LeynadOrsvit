@@ -13,10 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->lineEdit, SIGNAL(textChanged(const QString &texts)), this, SLOT(on_lineEdit_inputRejected()));
-    connect(ui->lineEdit_2, SIGNAL(clicked()), this, SLOT(on_lineEdit_2_inputRejected()));
-    connect(ui->lineEdit_3, SIGNAL(clicked()), this, SLOT(on_lineEdit_3_inputRejected()));
-    connect(ui->lineEdit_4, SIGNAL(clicked()), this, SLOT(on_lineEdit_4_inputRejected()));
     connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(CalculatingSem()));
     connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(CalculatingRes()));
 }
@@ -53,23 +49,34 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-void MainWindow::on_lineEdit_inputRejected()
+void Restrict(const QString &arg, QLineEdit *le, int &lab)
 {
-    Lab1=(ui->lineEdit->text()).toInt();
+    int value = arg.toInt();
+    if(value > 10)
+        value = 10;
+    if(value < 0)
+        value = 0;
+    le->setText(QString::number(value));
+    lab = value;
 }
 
-void MainWindow::on_lineEdit_2_inputRejected()
+void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
-    Lab2=(ui->lineEdit_2->text()).toInt();
+    Restrict(arg1, ui->lineEdit, Lab1);
 }
 
-
-void MainWindow::on_lineEdit_3_inputRejected()
+void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
 {
-     Lab3=(ui->lineEdit_3->text()).toInt();
+    Restrict(arg1, ui->lineEdit_2, Lab2);
 }
 
-void MainWindow::on_lineEdit_4_inputRejected()
+void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
 {
-    Ex=(ui->lineEdit_4->text()).toInt();
+     Restrict(arg1, ui->lineEdit_3, Lab3);
 }
+
+void MainWindow::on_lineEdit_4_textChanged(const QString &arg1)
+{
+     Restrict(arg1, ui->lineEdit_4, Ex);
+}
+

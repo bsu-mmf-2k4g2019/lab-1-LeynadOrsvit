@@ -19,14 +19,15 @@ private slots:
     void CalculatingSem();
     void CalculatingRes();
     void on_pushButton_clicked();
+   // void Restrict
 
-    void on_lineEdit_inputRejected();
+    void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_lineEdit_2_inputRejected();
+    void on_lineEdit_2_textChanged(const QString &arg1);
 
-    void on_lineEdit_3_inputRejected();
+    void on_lineEdit_3_textChanged(const QString &arg1);
 
-    void on_lineEdit_4_inputRejected();
+    void on_lineEdit_4_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
